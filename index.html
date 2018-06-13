@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.0.0/dist/phaser.min.js"></script>
+</head>
+<body>
+
+    <script>
+    var config = {
+        type: Phaser.AUTO,
+        width: window.innerWidth - 20,
+        height: window.innerHeight - 20,
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }        
+    };
+
+    var game = new Phaser.Game(config);
+
+    function preload ()
+    {
+        this.load.image('background', 'pics/background1.png');
+        this.load.image('tree1', 'pics/tree1.png');
+        this.load.spritesheet('paula', 'pics/paula2.png', { frameWidth: 100, frameHeight: 129 });
+    }
+
+    function create ()
+    {
+        this.add.image(750, 530, 'background');
+        this.add.image(720, 300, 'tree1');
+        
+        paula = this.add.sprite(300, 300, 'paula');
+        
+        //this.camera.follow(paula);
+        this.cameras.main.setBounds(0, 0, 1500, 1061);
+        cursors = game.input.keyboard.createCursorKeys();
+    }
+
+    function update ()
+    {
+        if (cursors.left.isDown)
+    {
+        paula.x -= 2;
+    }
+    else if (cursors.right.isDown)
+    {
+        paula.x += 2;
+    }
+
+    if (cursors.up.isDown)
+    {
+        paula.y -= 2;
+    }
+    else if (cursors.down.isDown)
+    {
+        paula.y += 2;
+    }
+    
+    this.cameras.main.scrollX = paula.x - 400;
+    this.cameras.main.scrollY = paula.y - 400;
+    
+    }
+    
+
+    </script>
+
+</body>
+</html>
